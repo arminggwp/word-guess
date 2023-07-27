@@ -30,16 +30,12 @@ function compareGuess(elements) {
   }
   for (let j = 0; j < guess.length; j++) {
     if (dictionary.includes(guess[j].value)) {
-      console.log('it includes ' + guess[j]);
       guess[j].style.backgroundColor = 'yellow';
       if (guess[j].value === dictionary[j]) {
         guess[j].style.backgroundColor = 'green';
-        console.log(guess[j].value + ' is in right position');
       }
     } else {
-      console.log('does not include ' + guess[j]);
       guess[j].style.backgroundColor = 'red';
     }
   }
 }
-
