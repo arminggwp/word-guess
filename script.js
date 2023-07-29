@@ -48,5 +48,5 @@ function compareGuess(inputs) {
   };
 };
 
-//generateRandomWord();
+generateRandomWord();
 switchInputFocus();
