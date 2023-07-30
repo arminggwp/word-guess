@@ -27,6 +27,9 @@ header {
 main {
   height: 80%;
   width: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .board {
@@ -34,23 +37,23 @@ main {
   display: flex; 
   flex-direction: row;
   justify-content: center;
-  pointer-events: none;
+  order: 0;
 }
 
-input {
+input, .nextBtn {
   height: 60px;
   width: 60px;
   text-align: center;
   background-color: transparent;
   border: 2px solid #39393b;
   margin: 2px;
-  color: white;
   outline: none;
+  color: #fff;
   font-size: 30px;
   font-weight: 600;
   text-transform: uppercase;
 }
 
-.active {
-  pointer-events: auto;
+input:focus {
+  border: 2px solid #787c7f;
 }
