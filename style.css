@@ -57,3 +57,22 @@ input, .nextBtn {
 input:focus {
   border: 2px solid #787c7f;
 }
+
+.score {
+  margin-top: 20px;
+  order: 1;
+}
+
+.nextBtn {
+ order: 2;
+ font-size: 20px;
+ width: 80px;
+}
+
+.nextBtn:hover {
+  border: 2px solid #787c7f;
+}
+
+.score, .nextBtn {
+  display: none;
+}

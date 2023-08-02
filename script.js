@@ -47,6 +47,10 @@ function compareGuess(inputs) {
       guess[j].style.backgroundColor = '#e76f51';
     };
   };
+  if (guess.every(input => input.style.backgroundColor === "rgb(42, 157, 143)")) {
+    document.querySelector('.score').style.display = 'block';
+    document.querySelector('.nextBtn').style.display = 'block';
+  };
 };
 
 function generateInputBoard() {
@@ -67,3 +71,14 @@ function generateInputBoard() {
 generateRandomWord();
 generateInputBoard();
 switchInputFocus();
+
+const array1 = ['a', 'b', 'c', 'd', 'e'];
+const array2 = ['a', 'b', 'c', 'd', 'e'];
+
+function ifArray() {
+  if (JSON.stringify(array1) === JSON.stringify(array2)) {
+    console.log('arrays are the same');
+  } else {
+    console.log('arrays are NOT the same');
+  }
+}
