@@ -58,8 +58,8 @@ input:focus {
   border: 2px solid #787c7f;
 }
 
-.score {
-  margin-top: 20px;
+.outcome {
+  margin: 20px;
   order: 1;
 }
 
@@ -73,6 +73,6 @@ input:focus {
   border: 2px solid #787c7f;
 }
 
-.score, .nextBtn {
+.announce, .nextBtn {
   display: none;
 }
