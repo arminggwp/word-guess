@@ -31,6 +31,7 @@ function switchInputFocus() {
   };
 };
 
+let score = 0;
 function compareGuess(inputs) {
   let guess = [];
   const allInputs = inputs.children;
@@ -48,7 +49,8 @@ function compareGuess(inputs) {
     };
   };
   if (guess.every(input => input.style.backgroundColor === "rgb(42, 157, 143)")) {
-    document.querySelector('.score').style.display = 'block';
+    score++;
+    document.querySelector('.outcome').innerText = 'Score: ' + score;
     document.querySelector('.nextBtn').style.display = 'block';
   };
 };
@@ -68,6 +70,16 @@ function generateInputBoard() {
   }
 }
 
-generateRandomWord();
-generateInputBoard();
-switchInputFocus();
+function loadAll(parameter) {
+  if (parameter === 'pageLoad') {
+    generateInputBoard();
+    switchInputFocus();
+  };
+  const inputs = document.querySelectorAll('input');
+  for (let i = 0; i < inputs.length; i++) {
+    inputs[i].value = '';
+    inputs[i].style.backgroundColor = 'transparent';
+  }
+  generateRandomWord();
+  document.querySelector('.nextBtn').style.display = 'none';
+}

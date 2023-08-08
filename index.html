@@ -5,15 +5,15 @@
     <title>Word Guess</title>
     <link rel="stylesheet" href="style.css">
   </head>
-  <body>
+  <body onload="loadAll('pageLoad')">
     <header>
       <h1>Word Guess</h1>
     </header>
     <main>
-      <div class="score"> Score
+      <div class="outcome"> Score
         <p class="announce">Good job! </p>
       </div>
-      <button class="nextBtn">Next</button>
+      <button class="nextBtn" onclick="loadAll('next')">Next</button>
     </main>
     <footer>Made by <a href="https://github.com/arminggwp">arminggwp</a></footer>
     <script src="script.js"></script>
