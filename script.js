@@ -1,85 +1,51 @@
-let randomWord = [];
-function generateRandomWord() {
-  fetch('https://random-word-api.herokuapp.com/word?length=5', {mode: 'cors'})
-    .then(function(response) {
-      return response.json();
-    })
-    .then(function(data) {
-      randomWord = data.toString();
-      randomWord = randomWord.split("");
-    });
-}
-
-function switchInputFocus() {
-  const allBoxes = document.querySelectorAll('.board');
-  allBoxes[0].children[0].focus();
-  for (let i = 0; i < allBoxes.length; i++) {
-    for (let j = 0; j < allBoxes[i].children.length; j++) {
-      allBoxes[i].children[j].addEventListener('keyup', function(e) {
-        if (e.keyCode === 8) {
-          this.previousElementSibling.focus();
-        } else {
-          try {
-            this.nextElementSibling.focus();
-          } catch (err) {
-            compareGuess(this.parentElement);
-            this.parentElement.nextElementSibling.children[0].focus();
-          };
-        };
-      });
-    };
-  };
-};
-
-let score = 0;
-function compareGuess(inputs) {
-  let guess = [];
-  const allInputs = inputs.children;
-  for (let i = 0; i < allInputs.length; i++) {
-    guess.push(allInputs[i]);
-  };
-  for (let j = 0; j < guess.length; j++) {
-    if (randomWord.includes(guess[j].value)) {
-      guess[j].style.backgroundColor = '#e9c46a';
-      if (guess[j].value === randomWord[j]) {
-        guess[j].style.backgroundColor = '#2a9d8f';
-      }
-    } else {
-      guess[j].style.backgroundColor = '#e76f51';
-    };
-  };
-  if (guess.every(input => input.style.backgroundColor === "rgb(42, 157, 143)")) {
-    score++;
-    document.querySelector('.outcome').innerText = 'Score: ' + score;
-    document.querySelector('.nextBtn').style.display = 'block';
-  };
-};
-
-function generateInputBoard() {
-  const main = document.querySelector('main');
-  for (let i = 0; i < 6; i++) {
-    const board = document.createElement('div');
-    board.classList.add('board');
-    for (let j = 0; j < 5; j++) {
-      const input = document.createElement('input');
-      input.setAttribute('type', 'text');
-      input.setAttribute('maxlength', '1');
-      board.appendChild(input);
+(function loadGameBoard() {
+  var board = document.querySelector('.board');
+  for (let i = 1; i < 7; i++) {
+    for (let j = 1; j < 6; j++) {
+      var tile = document.createElement('div');
+      tile.classList.add('row' + i, 'tile' + j, 'tile');
+      board.appendChild(tile);
     }
-    main.appendChild(board);
   }
+  inputHandler();
+  generateWord();
+})();
+
+function inputHandler() {
+  var input = document.querySelector('.word-input');
+  var tileCount = 0;
+  input.addEventListener('input', function(){
+    var tiles = document.querySelectorAll('.tile');
+    tiles[tileCount].textContent = input.value;
+    input.value = '';
+    if (tiles[tileCount].classList.contains('tile5')) {
+      checkWord(tiles[tileCount].className.split(" ")[0]);
+    }
+    tileCount++;
+  })
+};
+
+let word = '';
+function generateWord() {
+  fetch('./wordle.json')
+  .then(function(response) {
+    return response.json();
+  })
+  .then(function(data) {
+    var keys = Object.keys(data);
+    return word = data[keys[ keys.length * Math.random() << 0]];
+  });
 }
 
-function loadAll(parameter) {
-  if (parameter === 'pageLoad') {
-    generateInputBoard();
-    switchInputFocus();
-  };
-  const inputs = document.querySelectorAll('input');
-  for (let i = 0; i < inputs.length; i++) {
-    inputs[i].value = '';
-    inputs[i].style.backgroundColor = 'transparent';
+function checkWord(row) {
+  let guess = '';
+  var tilesRow = document.querySelectorAll('.' + row);
+  tilesRow.forEach(tile => {
+    guess += tile.textContent;
+  });
+  if (guess === word) {
+    console.log('CORRECT');
+  } else {
+    console.log('WRONG');
   }
-  generateRandomWord();
-  document.querySelector('.nextBtn').style.display = 'none';
 }
