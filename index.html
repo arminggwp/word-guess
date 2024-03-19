@@ -5,17 +5,34 @@
     <title>Word Guess</title>
     <link rel="stylesheet" href="style.css">
   </head>
-  <body onload="loadAll('pageLoad')">
+  <body>
     <header>
       <h1>Word Guess</h1>
     </header>
     <main>
-      <div class="outcome"> Score
-        <p class="announce">Good job! </p>
+      <div class="rules">
+        <p>
+          You have six attempts to guess a five-letter word,<br>
+          with feedback given for each guess.
+        </p>
+        <p>
+          After every guess, each letter is marked as either green, yellow or red: <br>
+          - <mark>green</mark> indicates that the letter is correct and in the correct position,<br>
+          - <mark>yellow</mark> means it is in the answer but not in the right position, <br>
+          - <mark>red</mark> indicates it is not in the answer at all.
+        </p>
       </div>
-      <button class="nextBtn" onclick="loadAll('next')">Next</button>
+      <div class="board">
+      </div>
+      <div class="result">
+        <p class="report"></p>
+        <p class="score">0</p>
+      </div>
+      <button class="start" onclick="startGame()">Start</button>
     </main>
-    <footer>Made by <a href="https://github.com/arminggwp">arminggwp</a></footer>
+    <footer>
+      <p>Made by <a href="https://github.com/arminggwp">arminggwp</a></p>
+    </footer>
     <script src="script.js"></script>
   </body>
 </html>
